@@ -1,0 +1,23 @@
+###### not there yet .. don't use this yet
+
+
+- name: Install on master from script
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Install apt packages for longhorn
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - nfs-common 
+        - open-iscsi 
+        - util-linux
+
+    - name: Create Storage folder
+      ansible.builtin.file:
+        path: /storage
+        state: directory
+
+
